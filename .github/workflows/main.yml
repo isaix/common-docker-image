@@ -1,0 +1,45 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a set of commands using the runners shell
+      - name: Testing Dockefiles
+        run: |
+          cd generated 
+          for File in *
+          do
+              docker build -f $File . -t $File
+              if [[ $? -ne 0 ]]; then
+                  exit 1
+              fi
+              OUTPUT_VAR=$(docker run $File)
+              if [[ "$OUTPUT_VAR" == "Hello, World!" ]]; then
+                  echo "The docker image for " $File "was built and deployed successfully"
+              else
+                  echo "The docker image for " $File "failed with unexpected output"
+                  exit 1
+              fi
+          done
