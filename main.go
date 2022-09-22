@@ -11,11 +11,11 @@ import (
 	"time"
 )
 
-const dockerfileTemplate = "DockerfileTemplate"
+const dockerfileTemplate = "Dockerfile"
 
 func main() {
 
-	dockerfilename := generateDockerfile("project0")
+	dockerfilename := generateDockerfile("project1")
 
 	println("Succesfully generated dockerfile: " + dockerfilename)
 
@@ -31,7 +31,7 @@ func generateDockerfile(name string) string {
 		log.Fatalf("failed opening file: %s", err1)
 	}
 
-	dockerfileAddition := []byte("#added this comment on " + currentTime.Format("2006-01-02 15:04:05") + "for project " + name + "\n")
+	dockerfileAddition := []byte("#added this comment on " + currentTime.Format("2006-01-02 15:04:05") + " for project " + name + "\n")
 
 	dockerfileContent := append(dockerfileAddition, baseDockerfile...)
 
