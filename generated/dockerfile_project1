@@ -1,5 +1,0 @@
-#added this comment on 2022-09-22 16:05:50 for project project1
-FROM ubuntu:latest
-
-
-CMD ["echo",  "Hello, World!"]

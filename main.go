@@ -13,11 +13,15 @@ import (
 
 const dockerfileTemplate = "Dockerfile"
 
+var projects = [3]string{"project1", "project2", "project3"}
+
 func main() {
 
-	dockerfilename := generateDockerfile("project1")
+	for _, element := range projects {
+		dockerfilename := generateDockerfile(element)
 
-	println("Succesfully generated dockerfile: " + dockerfilename)
+		println("Succesfully generated dockerfile: " + dockerfilename)
+	}
 
 }
 
