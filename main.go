@@ -15,7 +15,7 @@ const dockerfileTemplate = "DockerfileTemplate"
 
 func main() {
 
-	dockerfilename := generateDockerfile("project1")
+	dockerfilename := generateDockerfile("project0")
 
 	println("Succesfully generated dockerfile: " + dockerfilename)
 
@@ -35,7 +35,7 @@ func generateDockerfile(name string) string {
 
 	dockerfileContent := append(dockerfileAddition, baseDockerfile...)
 
-	dockerfile, err := os.Create("generated/Dockerfile_" + name)
+	dockerfile, err := os.Create("generated/dockerfile_" + name)
 
 	if err != nil {
 		log.Fatalf("failed creating file: %s", err)
