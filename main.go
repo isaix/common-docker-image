@@ -39,6 +39,11 @@ func generateDockerfile(name string) string {
 
 	dockerfileContent := append(dockerfileAddition, baseDockerfile...)
 
+	err := os.MkdirAll("generated", os.ModePerm)
+	if err != nil {
+		log.Println(err)
+	}
+
 	dockerfile, err := os.Create("generated/dockerfile_" + name)
 
 	if err != nil {
