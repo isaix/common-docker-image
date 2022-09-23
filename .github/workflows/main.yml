@@ -57,6 +57,7 @@ jobs:
       
       - name: Push docker images to Google Container Registry
         run: |
+          cd generated
           for File in *
           do 
             docker tag $File europe-west1-docker.pkg.dev/boozt-sandbox/common-docker-image/$File
